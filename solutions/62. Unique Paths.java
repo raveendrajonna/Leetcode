@@ -1,25 +1,19 @@
 class Solution {
     public int uniquePaths(int m, int n) {
-        int res=0;
-        int[][] dp = new int[m][n];
-        for(int i=0; i<n; i++)
-        {
-            dp[0][i] = 1;            
-        }
-        for(int i=0; i<m; i++)
-        {
-            dp[i][0] = 1;
-        }
+        //Math problem
+        //Total rows = m, total cols = n total down steps (m-1), total - (n-1) - R steps
+        //So lets m=3, n=2 means 2Ds, 1R ex : DDR, DRD, RDD 
+        // ncr(p,q) => (p!/q!(p-q)!)
         
-        for(int i=1; i<m; i++)
+        int ts = m+n-2;
+        int ds =m-1;
+        double res = 1d;
+        for(int i=1; i <= (m-1); i++)
         {
-            for(int j=1; j<n;j++)
-            {
-                dp[i][j] = dp[i-1][j] + dp[i][j-1];
-            }
+            res = res * (ts-(m-1)+i);
+            res = res/i;
         }
-        
-        return dp[m-1][n-1];
+        return (int)res;
         
     }
 }
