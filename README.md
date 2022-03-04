@@ -19,4 +19,5 @@
 |208|[ Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)|[Java](./solutions/208.%20Implement%20Trie%20(Prefix%20Tree).java)|30 ms|
 |226|[ Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)|[Java](./solutions/226.%20Invert%20Binary%20Tree.java)|0 ms|
 |252|[ Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)|[Java](./solutions/252.%20Meeting%20Rooms.java)|4 ms|
+|253|[ Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)|[Java](./solutions/253.%20Meeting%20Rooms%20II.java)|17 ms|
 |347|[ Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)|[Java](./solutions/347.%20Top%20K%20Frequent%20Elements.java)|8 ms|
