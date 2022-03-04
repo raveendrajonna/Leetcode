@@ -20,6 +20,7 @@
 |226|[ Invert Binary Tree](https://leetcode.com/problems/invert-binary-tree/)|[Java](./solutions/226.%20Invert%20Binary%20Tree.java)|0 ms|
 |252|[ Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)|[Java](./solutions/252.%20Meeting%20Rooms.java)|4 ms|
 |253|[ Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)|[Java](./solutions/253.%20Meeting%20Rooms%20II.java)|17 ms|
+|271|[ Encode and Decode Strings](https://leetcode.com/problems/encode-and-decode-strings/)|[Java](./solutions/271.%20Encode%20and%20Decode%20Strings.java)|8 ms|
 |347|[ Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)|[Java](./solutions/347.%20Top%20K%20Frequent%20Elements.java)|8 ms|
 |435|[ Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)|[Java](./solutions/435.%20Non-overlapping%20Intervals.java)|91 ms|
 |572|[ Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)|[Java](./solutions/572.%20Subtree%20of%20Another%20Tree.java)|3 ms|
