@@ -1,33 +1,31 @@
 class Solution {
 
-        private int[] nums;
-    private Random random;
-
+    int[] arr;
+    Random random;
     public Solution(int[] nums) {
-        this.nums = nums;
         random = new Random();
+        this.arr = nums;
     }
     
-    /** Resets the array to its original configuration and return it. */
     public int[] reset() {
-        return nums;
+      return arr;  
     }
     
-    /** Returns a random shuffling of the array. */
     public int[] shuffle() {
-        if(nums == null) return null;
-        int[] a = nums.clone();
-        for(int j = 1; j < a.length; j++) {
-            int i = random.nextInt(j + 1);
-            swap(a, i, j);
+       int[] temp = arr.clone();
+        for(int i=1; i<arr.length; i++)
+        {
+            int j = random.nextInt(i+1);
+            swap(temp,i,j);
         }
-        return a;
+        return temp;
     }
     
-    private void swap(int[] a, int i, int j) {
-        int t = a[i];
+    public void swap(int[] a, int i , int j)
+    {
+        int temp =a[i];
         a[i] = a[j];
-        a[j] = t;
+        a[j] = temp;
     }
 }
 
