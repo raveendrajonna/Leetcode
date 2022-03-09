@@ -27,4 +27,5 @@
 |366|[ Find Leaves of Binary Tree](https://leetcode.com/problems/find-leaves-of-binary-tree/)|[Java](./solutions/366.%20Find%20Leaves%20of%20Binary%20Tree.java)|0 ms|
 |384|[ Shuffle an Array](https://leetcode.com/problems/shuffle-an-array/)|[Java](./solutions/384.%20Shuffle%20an%20Array.java)|170 ms|
 |435|[ Non-overlapping Intervals](https://leetcode.com/problems/non-overlapping-intervals/)|[Java](./solutions/435.%20Non-overlapping%20Intervals.java)|91 ms|
+|528|[ Random Pick with Weight](https://leetcode.com/problems/random-pick-with-weight/)|[Java](./solutions/528.%20Random%20Pick%20with%20Weight.java)|56 ms|
 |572|[ Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)|[Java](./solutions/572.%20Subtree%20of%20Another%20Tree.java)|3 ms|
