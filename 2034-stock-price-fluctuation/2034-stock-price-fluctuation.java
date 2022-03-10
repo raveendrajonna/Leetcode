@@ -1,20 +1,19 @@
 class StockPrice {
-
     TreeMap<Integer,Integer> record;
-    TreeMap<Integer,HashSet<Integer>> vals;
-    
+    TreeMap<Integer, HashSet<Integer>> vals;
+
     public StockPrice() {
-        vals = new TreeMap<>();
         record = new TreeMap<>();
+        vals = new TreeMap<>();
     }
     
     public void update(int timestamp, int price) {
         if(record.containsKey(timestamp))
         {
             int prevVal = record.get(timestamp);
-            HashSet<Integer>  book = vals.get(prevVal);
-            book.remove(timestamp);
-            if(book.isEmpty())
+            HashSet<Integer> indexs = vals.get(prevVal);
+            indexs.remove(timestamp);
+            if(indexs.size() == 0)
             {
                 vals.remove(prevVal);
             }
@@ -25,15 +24,15 @@ class StockPrice {
     }
     
     public int current() {
-      return record.lastEntry().getValue();
+      return  record.lastEntry().getValue();
     }
     
     public int maximum() {
-      return vals.lastKey();  
+       return vals.lastKey(); 
     }
     
     public int minimum() {
-     return vals.firstKey();  
+        return vals.firstKey();
     }
 }
 
