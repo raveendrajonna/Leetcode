@@ -15,22 +15,21 @@
  */
 class Solution {
     public List<TreeNode> findDuplicateSubtrees(TreeNode root) {
-        HashMap<String,Integer> hm  = new HashMap<>();
+        HashMap<String,Integer> hm = new HashMap<>();
         List<TreeNode> res = new ArrayList<>();
-        postOrder(root,hm, res);
+        postOrder(root, hm, res);
         return res;
     }
     
-    public String postOrder(TreeNode root, HashMap<String,Integer> hm, List<TreeNode> res)
+    public String postOrder(TreeNode root, HashMap<String,Integer> hm, List<TreeNode> res )
     {
-        if(root == null)
-             return "#";
+        if(root == null) return "#";
         
-        String key = root.val+","+postOrder(root.left,hm, res)+","+postOrder(root.right, hm, res);
+        String key = root.val +","+postOrder(root.left, hm, res)+","+postOrder(root.right, hm, res);
         hm.put(key, hm.getOrDefault(key,0)+1);
-        if(hm.get(key)==2)
+        if(hm.get(key) == 2)
         {
-            res.add(root);      
+            res.add(root);
         }
         return key;
     }
