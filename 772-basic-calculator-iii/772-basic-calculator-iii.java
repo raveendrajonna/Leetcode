@@ -1,68 +1,60 @@
 class Solution {
-    HashSet<Character> hs = new HashSet<>();
+    
     public int calculate(String s) {
-        hs.add('+');
-        hs.add('-');
-        hs.add('*');
-        hs.add('/');
-        int[] idx = new int[1];
-        idx[0] = 0;
-        return eval(s,idx);   
+       int[] idx =new int[]{0};
+       return eval(s, idx);
     }
     
-    public int eval(String s, int[] index)
+    public int eval(String s, int[] idx)
     {
+       char operator ='+';
+       int num = 0;
         Stack<Integer> stk = new Stack<>();
-        int num=0;
-        char operator='+';
-        while(index[0] < s.length())
-        {
-            if(Character.isDigit(s.charAt(index[0])))
-            {
-                num = num*10+ s.charAt(index[0])-'0';
-                index[0]++;
-            }
-            else if( hs.contains(s.charAt(index[0])))
-            {
-                handleOperator(operator, num, stk);
-                operator = s.charAt(index[0]);
-                num=0;
-                index[0]++;
-            }
-            else if(s.charAt(index[0]) == '(')
-            {
-                index[0]++;
-                
-                num = eval(s,index);
-                //System.out.println(" num :"+ num);
-                //stk.push(num);
-            }
-            else if(s.charAt(index[0]) == ')')
-            {
-               handleOperator(operator, num, stk);
-               index[0]++;
-               int sum=0;
-               while(stk.size() > 0)
-               {
-                  sum = sum+stk.pop();  
-               }
-                return sum;
-            }
-            
-        }
-        handleOperator(operator,num, stk); 
-        
-        int sum =0;
-        //System.out.println(" ***** " + stk.size());
-        while(stk.size() > 0)
-        {
-            sum = sum + stk.pop();
-           // System.out.println(" res :" + sum);
-        }
-        return sum;
+       while(idx[0] < s.length())
+       {
+          char c =  s.charAt(idx[0]); 
+          if(Character.isDigit(c))
+          {
+              num = num*10 + (s.charAt(idx[0])-'0');
+              idx[0]++;
+          }
+          else if(c == '(')
+          {
+              idx[0]++;
+              num = eval(s, idx);
+          }
+          else if(c == '+' || c == '-' || c == '*' || c == '/')
+          {
+              handleOpr(operator, num, stk);
+              operator = c;
+              num =0;
+              idx[0]++;
+          }
+          else if(c == ')')
+          {
+              handleOpr(operator,num, stk); 
+              num =0;
+              int sum =0;
+              while(stk.size() > 0)
+              {
+                  sum = sum+stk.pop();
+              }
+              idx[0]++;
+              return sum;
+          }
+
+       }
+       handleOpr(operator, num, stk); 
+       int sum =0;
+       while(stk.size() > 0)
+       {
+          sum = sum+stk.pop();
+          // System.out.println(" su :"+ sum);
+       }
+       return sum;
     }
     
-    public void  handleOperator(char operator, int num,Stack<Integer> stk)
+    public void handleOpr(char operator, int num, Stack<Integer> stk)
     {
         switch(operator)
         {
@@ -70,7 +62,7 @@ class Solution {
                 stk.push(num);
                 break;
             case '-':
-                stk.push(num*-1);
+                stk.push(-1*num);
                 break;
             case '*':
                 stk.push(stk.pop()*num);
