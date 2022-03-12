@@ -17,40 +17,40 @@
  */
 
 class Solution {
-    int[] ra = new int[] {-1, 0,  1,  0};
+    int[] ra = new int[] { -1, 0, 1, 0};
     int[] ca = new int[] { 0, 1, 0, -1};
     public void cleanRoom(Robot robot) {
-        HashSet<String> hs = new HashSet<>();
-        clean(robot, 0, 0, 0, hs);
+      HashSet<String> hs = new HashSet<String>();
+      clean(robot, 0,0,0,hs);
     }
     
     public void clean(Robot robot, int r, int c, int dir, HashSet<String> hs)
     {
-        hs.add(r+"-"+c);
-        //System.out.println(r+"-"+c +", dir :" + dir);
+        hs.add(r+"@"+c);
         robot.clean();
-
-   for (int i = dir; i < dir + 4;  i++)
+        
+        for(int i=0; i<4; i++)
         {
-            int nr = r+ra[i%4];
-            int nc = c+ca[i%4];
-            if(!hs.contains(nr+"-"+nc) && robot.move())
+            int nr = r+ra[ (dir+i)%4];
+            int nc = c + ca[(dir+i)%4];
+           
+            if(!hs.contains(nr+"@"+nc) && robot.move())
             {
-                clean(robot, nr, nc, (i%4), hs);
+                clean(robot, nr, nc, (dir+i)%4, hs);
             }
             robot.turnRight();
         }
         goBack(robot);
-        
     }
     
     public void goBack(Robot robot)
     {
         robot.turnRight();
         robot.turnRight();
+        // reached parent, but direction is reverse now.
         robot.move();
         robot.turnRight();
         robot.turnRight();
-        
+        //now direction also set.
     }
 }
