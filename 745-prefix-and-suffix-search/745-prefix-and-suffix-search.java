@@ -1,39 +1,37 @@
 class WordFilter {
-
     Node root;
+    
     public WordFilter(String[] words) {
        root = new Node();
-       for(int i=0; i<words.length; i++)
-       {
-          String word = words[i];
-          int len = word.length();
-           word = word+"{"+word;
-          for(int j=0 ; j < len; j++)
-          {
-              insert(word.substring(j),i);
-              System.out.println("inserted :" + word.substring(j));
-          }
-       }
+        for(int i=0; i<words.length; i++)
+        {
+            String word= words[i];
+            int len = word.length();
+            word = word+"{"+word;
+            for(int j=0; j<len; j++)
+            {
+                insert(word.substring(j), i);
+            }
+        }
     }
     
-    public void insert(String word,int idx)
+    public void insert(String word, int idx)
     {
         Node temp = root;
         for(int i=0; i<word.length(); i++)
         {
             if(temp.child[word.charAt(i)-'a'] == null)
-            {
                 temp.child[word.charAt(i)-'a'] = new Node();
-            }
-            temp.child[word.charAt(i)-'a'].idx = idx;
+            
             temp = temp.child[word.charAt(i)-'a'];
+            temp.idx = idx;
         }
     }
     
     public int f(String prefix, String suffix) {
+       Node temp = root;
         String word = suffix+"{"+prefix;
-        Node temp = root;
-        for(int i=0; i<  word.length(); i++)
+        for(int i=0; i<word.length(); i++)
         {
             if(temp.child[word.charAt(i)-'a'] == null)
             {
@@ -50,8 +48,8 @@ class WordFilter {
         int idx;
         public Node()
         {
-            idx=0;
             child = new Node[27];
+            idx =0;
         }
     }
 }
