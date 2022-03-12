@@ -33,4 +33,5 @@
 |572|[ Subtree of Another Tree](https://leetcode.com/problems/subtree-of-another-tree/)|[Java](./solutions/572.%20Subtree%20of%20Another%20Tree.java)|3 ms|
 |652|[ Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/)|[Java](./solutions/652.%20Find%20Duplicate%20Subtrees.java)|37 ms|
 |1048|[ Longest String Chain](https://leetcode.com/problems/longest-string-chain/)|[Java](./solutions/1048.%20Longest%20String%20Chain.java)|78 ms|
+|1277|[ Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones/)|[Java](./solutions/1277.%20Count%20Square%20Submatrices%20with%20All%20Ones.java)|8 ms|
 |2034|[ Stock Price Fluctuation ](https://leetcode.com/problems/stock-price-fluctuation/)|[Java](./solutions/2034.%20Stock%20Price%20Fluctuation%20.java)|186 ms|
