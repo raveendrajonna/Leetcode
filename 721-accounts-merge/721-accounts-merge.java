@@ -1,53 +1,56 @@
 class Solution {
+    DS ds = new DS();
     HashMap<String,Integer> hmEmailToId;
     HashMap<String,String> hmEmailToName;
-    DS ds;
+    HashMap<Integer,String> hmIdToName;
+    HashMap<Integer, List<String>> hmIdToAccounts;
     int id=0;
-    HashMap<Integer, List<String>> hmIdToEmails;
     public List<List<String>> accountsMerge(List<List<String>> accounts) {
+       ds = new DS();
         hmEmailToId = new HashMap<>();
-        hmEmailToName = new HashMap<>();
-        ds = new DS();
-        hmIdToEmails = new HashMap<>();
+        hmEmailToName= new HashMap<>();
+        hmIdToName = new HashMap<>();
+        hmIdToAccounts = new HashMap<>();
         
         for(List<String> account : accounts)
         {
             String name = account.get(0);
-            
             for(int i=1; i<account.size(); i++)
             {
-                if(!hmEmailToName.containsKey(account.get(i)))
-                  hmEmailToName.put(account.get(i) , name);
+                String email = account.get(i);
+                String firstEmail = account.get(1);
                 
-                if(!hmEmailToId.containsKey(account.get(i)))
+                if(!hmEmailToId.containsKey(email))
                 {
-                    hmEmailToId.put(account.get(i), id);
+                    hmEmailToId.put(email, id);
+                    hmIdToName.put(id, name);
                     id++;
                 }
                 
-                ds.merge(hmEmailToId.get(account.get(1)) , hmEmailToId.get(account.get(i)));
+                hmEmailToName.put(email, name);
+                ds.merge(hmEmailToId.get(account.get(1)), hmEmailToId.get(account.get(i)));
             }
         }
         
         for(String email : hmEmailToId.keySet())
         {
             int idx = ds.find(hmEmailToId.get(email));
-            if(!hmIdToEmails.containsKey(idx))
+            if(!hmIdToAccounts.containsKey(idx))
             {
-                hmIdToEmails.put(idx, new ArrayList<>());
+                hmIdToAccounts.put(idx, new ArrayList<>());
             }
-            hmIdToEmails.get(idx).add(email);
+            hmIdToAccounts.get(idx).add(email);
         }
         
-        for(List<String> lst : hmIdToEmails.values())
+        for(int id: hmIdToAccounts.keySet())
         {
-            Collections.sort(lst);
-            lst.add(0, hmEmailToName.get(lst.get(0)));
+            Collections.sort(hmIdToAccounts.get(id));
+            List<String>  account = hmIdToAccounts.get(id);
+            Collections.sort(account);
+            account.add(0,  hmIdToName.get(id));
         }
         
-        return new ArrayList(hmIdToEmails.values());
-        
-        
+        return new ArrayList(hmIdToAccounts.values());
     }
     
     class DS
@@ -56,8 +59,8 @@ class Solution {
         
         public DS()
         {
-            parent = new int[10001];
-            for(int i=0; i<10001; i++)
+            parent = new int[10000];
+            for(int i=0; i<10000; i++)
             {
                 parent[i] = i;
             }
@@ -70,7 +73,7 @@ class Solution {
         
         public int find(int x)
         {
-            if(parent[x] != x)
+            if(x != parent[x])
                 parent[x] = find(parent[x]);
             
             return parent[x];
