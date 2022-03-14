@@ -1,51 +1,38 @@
 class Solution {
     public int minTransfers(int[][] transactions) {
-        // Key: person's ID   Value: person's balence after calculation
-        // {1 : -5} means person 1 should get $5
-        // {2 : 10} means person 2 should pay $10
-        Map<Integer, Integer> map = new HashMap<>();
-        for (int[] trans : transactions) {
-            map.put(trans[0], map.getOrDefault(trans[0], 0) - trans[2]);
-            map.put(trans[1], map.getOrDefault(trans[1], 0) + trans[2]);
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int[] transaction : transactions)
+        {
+            hm.put(transaction[0], hm.getOrDefault(transaction[0],0)+ transaction[2]);
+            hm.put(transaction[1], hm.getOrDefault(transaction[1],0)- transaction[2]);
         }
         
-        // Since after we get those amount of balence, person's ID does not affect the final result
-        int n = map.size(), i = 0;
-        int[] balence = new int[n];
-        for (int k : map.keySet()) {
-            balence[i++] = map.get(k);
+        int[] res = new int[hm.size()];
+        int idx=0;
+        for(int key : hm.keySet())
+        {
+            res[idx++] = hm.get(key);
         }
         
-        return dfs(0, balence);
+        return dfs(0, res);
     }
     
-    private int dfs(int idx, int[] balence) {
-        if (idx == balence.length) return 0;                  // all balence are cleared ==> requires 0 operation
-        if (balence[idx] == 0) return dfs(idx + 1, balence);  // curr person has balence 0 ==> skip curr person
+    public int dfs(int idx, int[] res)
+    {
+       // System.out.println(Arrays.toString(res));
+        if(idx == res.length) return 0;
         
-        int res = Integer.MAX_VALUE;
+        if(res[idx] == 0)
+            return dfs(idx+1, res);
         
-        int currDebt = balence[idx];
+        int ans = Integer.MAX_VALUE;
         
-        for (int i = idx+1; i < balence.length; i++) {
-            /* Key step 1 :
-                if either 1. balence[idx] & balence[i] are both positive or negative 
-                          2. balence[idx] | balence[i] has 0 balance 
-                then operate between them is meaningless 
-            */
-            if (balence[i] * currDebt >= 0) continue;
-            
-            /* Key Step 2 : 
-                transfer all balance from balance[idx] to balance[i], i.e., 
-                after the transaction, balance[idx] = 0
-          
-            */
-            balence[i] += currDebt;
-            res = Math.min(res, 1 + dfs(idx + 1, balence));
-            balence[i] -= currDebt;   
-            
-            
+        for(int i= idx+1; i<res.length; i++)
+        {
+            res[i] += res[idx];
+            ans = Math.min(ans , 1+dfs(idx+1, res));
+            res[i] -= res[idx];
         }
-        return res;
+        return ans;
     }
 }
