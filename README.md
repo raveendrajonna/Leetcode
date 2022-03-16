@@ -42,3 +42,4 @@
 |1284|[ Minimum Number of Flips to Convert Binary Matrix to Zero Matrix](https://leetcode.com/problems/minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix/)|[Java](./solutions/1284.%20Minimum%20Number%20of%20Flips%20to%20Convert%20Binary%20Matrix%20to%20Zero%20Matrix.java)|13 ms|
 |1554|[ Strings Differ by One Character](https://leetcode.com/problems/strings-differ-by-one-character/)|[Java](./solutions/1554.%20Strings%20Differ%20by%20One%20Character.java)|1372 ms|
 |2034|[ Stock Price Fluctuation ](https://leetcode.com/problems/stock-price-fluctuation/)|[Java](./solutions/2034.%20Stock%20Price%20Fluctuation%20.java)|186 ms|
+|2115|[ Find All Possible Recipes from Given Supplies](https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/)|[Java](./solutions/2115.%20Find%20All%20Possible%20Recipes%20from%20Given%20Supplies.java)|53 ms|
