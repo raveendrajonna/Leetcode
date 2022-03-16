@@ -43,3 +43,4 @@
 |1554|[ Strings Differ by One Character](https://leetcode.com/problems/strings-differ-by-one-character/)|[Java](./solutions/1554.%20Strings%20Differ%20by%20One%20Character.java)|1372 ms|
 |2034|[ Stock Price Fluctuation ](https://leetcode.com/problems/stock-price-fluctuation/)|[Java](./solutions/2034.%20Stock%20Price%20Fluctuation%20.java)|186 ms|
 |2115|[ Find All Possible Recipes from Given Supplies](https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/)|[Java](./solutions/2115.%20Find%20All%20Possible%20Recipes%20from%20Given%20Supplies.java)|53 ms|
+|2128|[ Remove All Ones With Row and Column Flips](https://leetcode.com/problems/remove-all-ones-with-row-and-column-flips/)|[Java](./solutions/2128.%20Remove%20All%20Ones%20With%20Row%20and%20Column%20Flips.java)|22 ms|
