@@ -21,7 +21,7 @@ class Solution {
                 int newPos = cur[0]+cur[1]; //curpos+cur speed
                 int newSpeed = 2 * cur[1];
                 
-                if( !visited.contains(newPos+"-"+newSpeed) & Math.abs(newPos-target) < target)
+                if( !visited.contains(newPos+"-"+newSpeed) && Math.abs(newPos-target) < target)
                 {
                     q.add(new int[] {newPos, newSpeed} );
                     visited.add(newPos+"-"+newSpeed);
@@ -31,7 +31,7 @@ class Solution {
                 newPos = cur[0];
                 newSpeed = cur[1]>0?-1:1;
                 
-               if( !visited.contains(newPos+"-"+newSpeed) & Math.abs(newPos-target) < target)
+               if( !visited.contains(newPos+"-"+newSpeed) && Math.abs(newPos-target) < target)
                 {
                      q.add(new int[] {newPos, newSpeed} );
                     visited.add(newPos+"-"+newSpeed);
