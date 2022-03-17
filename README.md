@@ -35,6 +35,7 @@
 |652|[ Find Duplicate Subtrees](https://leetcode.com/problems/find-duplicate-subtrees/)|[Java](./solutions/652.%20Find%20Duplicate%20Subtrees.java)|37 ms|
 |664|[ Strange Printer](https://leetcode.com/problems/strange-printer/)|[Java](./solutions/664.%20Strange%20Printer.java)|58 ms|
 |721|[ Accounts Merge](https://leetcode.com/problems/accounts-merge/)|[Java](./solutions/721.%20Accounts%20Merge.java)|71 ms|
+|818|[ Race Car](https://leetcode.com/problems/race-car/)|[Java](./solutions/818.%20Race%20Car.java)|853 ms|
 |887|[ Super Egg Drop](https://leetcode.com/problems/super-egg-drop/)|[Java](./solutions/887.%20Super%20Egg%20Drop.java)|21 ms|
 |1048|[ Longest String Chain](https://leetcode.com/problems/longest-string-chain/)|[Java](./solutions/1048.%20Longest%20String%20Chain.java)|78 ms|
 |1249|[ Minimum Remove to Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/)|[Java](./solutions/1249.%20Minimum%20Remove%20to%20Make%20Valid%20Parentheses.java)|105 ms|
