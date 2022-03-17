@@ -41,6 +41,7 @@
 |1249|[ Minimum Remove to Make Valid Parentheses](https://leetcode.com/problems/minimum-remove-to-make-valid-parentheses/)|[Java](./solutions/1249.%20Minimum%20Remove%20to%20Make%20Valid%20Parentheses.java)|105 ms|
 |1277|[ Count Square Submatrices with All Ones](https://leetcode.com/problems/count-square-submatrices-with-all-ones/)|[Java](./solutions/1277.%20Count%20Square%20Submatrices%20with%20All%20Ones.java)|8 ms|
 |1284|[ Minimum Number of Flips to Convert Binary Matrix to Zero Matrix](https://leetcode.com/problems/minimum-number-of-flips-to-convert-binary-matrix-to-zero-matrix/)|[Java](./solutions/1284.%20Minimum%20Number%20of%20Flips%20to%20Convert%20Binary%20Matrix%20to%20Zero%20Matrix.java)|13 ms|
+|1293|[ Shortest Path in a Grid with Obstacles Elimination](https://leetcode.com/problems/shortest-path-in-a-grid-with-obstacles-elimination/)|[Java](./solutions/1293.%20Shortest%20Path%20in%20a%20Grid%20with%20Obstacles%20Elimination.java)|43 ms|
 |1554|[ Strings Differ by One Character](https://leetcode.com/problems/strings-differ-by-one-character/)|[Java](./solutions/1554.%20Strings%20Differ%20by%20One%20Character.java)|1372 ms|
 |2034|[ Stock Price Fluctuation ](https://leetcode.com/problems/stock-price-fluctuation/)|[Java](./solutions/2034.%20Stock%20Price%20Fluctuation%20.java)|186 ms|
 |2115|[ Find All Possible Recipes from Given Supplies](https://leetcode.com/problems/find-all-possible-recipes-from-given-supplies/)|[Java](./solutions/2115.%20Find%20All%20Possible%20Recipes%20from%20Given%20Supplies.java)|53 ms|
