@@ -44,7 +44,7 @@ class LRUCache {
             node.val = value;
             removeNode(node);
             addNodeFirst(node);
-            hm.put(key, node);
+            //hm.put(key, node);
         }
         else
         {
