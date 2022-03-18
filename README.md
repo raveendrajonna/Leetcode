@@ -23,6 +23,7 @@
 |252|[ Meeting Rooms](https://leetcode.com/problems/meeting-rooms/)|[Java](./solutions/252.%20Meeting%20Rooms.java)|4 ms|
 |253|[ Meeting Rooms II](https://leetcode.com/problems/meeting-rooms-ii/)|[Java](./solutions/253.%20Meeting%20Rooms%20II.java)|17 ms|
 |271|[ Encode and Decode Strings](https://leetcode.com/problems/encode-and-decode-strings/)|[Java](./solutions/271.%20Encode%20and%20Decode%20Strings.java)|8 ms|
+|316|[ Remove Duplicate Letters](https://leetcode.com/problems/remove-duplicate-letters/)|[Java](./solutions/316.%20Remove%20Duplicate%20Letters.java)|4 ms|
 |347|[ Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)|[Java](./solutions/347.%20Top%20K%20Frequent%20Elements.java)|8 ms|
 |366|[ Find Leaves of Binary Tree](https://leetcode.com/problems/find-leaves-of-binary-tree/)|[Java](./solutions/366.%20Find%20Leaves%20of%20Binary%20Tree.java)|0 ms|
 |384|[ Shuffle an Array](https://leetcode.com/problems/shuffle-an-array/)|[Java](./solutions/384.%20Shuffle%20an%20Array.java)|170 ms|
