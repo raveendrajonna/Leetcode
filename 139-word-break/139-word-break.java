@@ -11,8 +11,7 @@ class Solution {
         
         for(int i=0; i<s.length(); i++)
         {
-            int size = lst.size();
-            for(int j=size-1; j>=0; j--)
+            for(int j=0; j<lst.size(); j++)
             {
                 if(hs.contains(s.substring(lst.get(j)+1,i+1)))
                 {
