@@ -1,23 +1,21 @@
 class Solution {
 
     TreeMap<Integer,Integer> tm;
-    int sum;
-    Random rand = new Random();
+    int sum =0;
+    Random random;
     public Solution(int[] w) {
-        tm = new TreeMap<>();
-        sum =0;
+        random = new Random();
+        tm = new TreeMap<>();  
         for(int i=0; i<w.length; i++)
         {
             sum = sum + w[i];
             tm.put(sum,i);
         }
-        
-        
     }
     
     public int pickIndex() {
-       int num = rand.nextInt(sum)+1;
-       return tm.ceilingEntry(num).getValue();
+        int idx = random.nextInt(sum)+1;
+        return tm.ceilingEntry(idx).getValue();
     }
 }
 
