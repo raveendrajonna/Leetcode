@@ -24,7 +24,6 @@ class Solution {
         List<String> res = new ArrayList<>();
         if(lst.get(lst.size()-1) != s.length()-1)
         {
-            System.out.println(" res :");
             return res;
         }
         
@@ -44,11 +43,9 @@ class Solution {
         
         for(int i=idx+1; i<lst.size(); i++)
         {
-           //System.out.println(" aa - " + s.substring(lst.get(idx)+1, lst.get(i)+1));
             if(hs.contains(s.substring(lst.get(idx)+1, lst.get(i)+1)))
             {
                 String newCur = cur+" "+s.substring(lst.get(idx)+1, lst.get(i)+1);
-               //System.out.println(" ss :"+ newCur);
                 util(lst, i, s, newCur, hs, res);  
             }
         }
