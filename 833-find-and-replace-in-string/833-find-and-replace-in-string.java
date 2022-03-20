@@ -7,7 +7,7 @@ class Solution {
            Node nd = new Node(indices[i], sources[i], targets[i]);
             nodes[i] = nd;
         }
-        Arrays.sort(nodes);
+        Arrays.sort(nodes, (x,y)-> (y.idx - x.idx));
         
         for(int i=0; i<n; i++)
         {
@@ -22,7 +22,7 @@ class Solution {
         return s;
     }
     
-    class Node implements Comparable<Node>
+    class Node
     {
         int idx;
         String source;
@@ -35,10 +35,10 @@ class Solution {
             this.dest = dest;
         }
         
-        @Override
+       /* @Override
         public int compareTo(Node other)
         {
             return other.idx - this.idx;
-        }
+        } */
     }
 }
