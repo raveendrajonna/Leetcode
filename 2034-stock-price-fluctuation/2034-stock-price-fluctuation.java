@@ -1,38 +1,42 @@
 class StockPrice {
-    TreeMap<Integer,Integer> record;
-    TreeMap<Integer, HashSet<Integer>> vals;
 
+    TreeMap<Integer,HashSet<Integer>> tm;
+    TreeMap<Integer,Integer> record;
     public StockPrice() {
-        record = new TreeMap<>();
-        vals = new TreeMap<>();
+       record = new TreeMap<>();
+       tm = new TreeMap<>();
+       
     }
     
     public void update(int timestamp, int price) {
-        if(record.containsKey(timestamp))
+       if(record.containsKey(timestamp))
+       {
+           HashSet<Integer> hs = tm.get(record.get(timestamp));
+           hs.remove(timestamp);
+           if(hs.size() == 0)
+           {
+               tm.remove(record.get(timestamp));
+           }
+       }
+        
+        record.put(timestamp,price);
+        if(!tm.containsKey(price))
         {
-            int prevVal = record.get(timestamp);
-            HashSet<Integer> indexs = vals.get(prevVal);
-            indexs.remove(timestamp);
-            if(indexs.size() == 0)
-            {
-                vals.remove(prevVal);
-            }
+           tm.put(price,new HashSet<>());
         }
-        record.put(timestamp, price);
-        vals.put(price, vals.getOrDefault(price, new HashSet<>()));
-        vals.get(price).add(timestamp);
+        tm.get(price).add(timestamp);
     }
     
     public int current() {
-      return  record.lastEntry().getValue();
+      return record.lastEntry().getValue(); 
     }
     
     public int maximum() {
-       return vals.lastKey(); 
+      return tm.lastEntry().getKey(); 
     }
     
     public int minimum() {
-        return vals.firstKey();
+      return tm.firstEntry().getKey();  
     }
 }
 
