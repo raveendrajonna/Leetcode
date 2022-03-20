@@ -1,33 +1,32 @@
 class Solution {
-    public int firstMissingPositive(int[] A) {
-        int n = A.length;
-        int i=1;
+    public int firstMissingPositive(int[] nums) {
+        int n = nums.length;
+        int i=0;
         while(i<n)
         {
-            int idx = A[i]-1;
-            if(A[i]>0 && A[i]<=n && A[idx] != A[i])
-            {
-                
-                swap(A,i,idx);
-            }
-            else
-            {
-                i++;
-            }
+              if(nums[i] >0 && nums[i] <= n && nums[nums[i]-1] !=  nums[i] )
+              {
+                 swap(nums, nums[i]-1, i);
+              }
+              else
+               {
+                    i++;
+               }
         }
-        System.out.println(" sorted : " + Arrays.toString(A));
-        i =0;
-        while(i<n && A[i] == i+1)
+        System.out.println(" sorted : " + Arrays.toString(nums));
+        i = 0;
+        while(i<n && nums[i] == i+1)
         {
             i++;
         }
         return i+1;
         
     }
-    public void swap(int[] A, int i, int j)
+    
+    public void swap(int[] nums, int i , int j)
     {
-        int temp = A[i];
-        A[i] = A[j];
-        A[j] = temp;
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
     }
 }
