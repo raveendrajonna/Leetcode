@@ -13,7 +13,7 @@ class Solution {
                     i++;
                }
         }
-        System.out.println(" sorted : " + Arrays.toString(nums));
+        //System.out.println(" sorted : " + Arrays.toString(nums));
         i = 0;
         while(i<n && nums[i] == i+1)
         {
