@@ -15,51 +15,68 @@
  */
 class Solution {
     public String getDirections(TreeNode root, int startValue, int destValue) {
-        TreeNode lca = findLCA(root, startValue, destValue);
+        TreeNode lca = findLca(root,startValue, destValue);
         
-        List<Character> slst = new ArrayList<>();
-        getDirection(lca, startValue, slst);
+        List<String> lstr = new ArrayList<>();
+        getDirection(lca,startValue,lstr);
         
-        List<Character> dlst = new ArrayList<>();
-        getDirection(lca, destValue, dlst);
+        List<String> rstr =new ArrayList<>();
+        getDirection(lca, destValue, rstr);
         
         StringBuilder sb = new StringBuilder();
-        for(int i=0; i< slst.size(); i++)
+        for(String str : lstr)
             sb.append("U");
         
-        for(int i=0; i<dlst.size(); i++)
-            sb.append(dlst.get(i));
+        for(String str : rstr)
+        {
+            sb.append(str);
+        }
         
         return sb.toString();
+        
     }
     
-    public TreeNode findLCA(TreeNode root, int s, int d)
+    public boolean getDirection(TreeNode root, int val, List<String> lst)
     {
-        if(root == null) return null;
-        if(root.val == s || root.val == d) return root;
+        if(root == null) 
+            return false;
         
-        TreeNode l = findLCA(root.left, s, d);
-        TreeNode r = findLCA(root.right, s, d);
+        if(root.val == val)
+            return true;
         
-        if(l != null && r != null) return root;
-        if(l!= null) return l;
-        return r;
-    }
-    
-    public boolean getDirection(TreeNode root, int v, List<Character> lst)
-    {
-        if(root == null) return false;
-        
-        if(root.val == v) return true;
-        
-        lst.add('L');
-        if ( getDirection(root.left, v, lst)) return true;
+        lst.add("L");
+        if(getDirection(root.left, val, lst))
+        {
+            return true;
+        }
         lst.remove(lst.size()-1);
         
-        lst.add('R');
-        if(getDirection(root.right, v, lst)) return true;
+        lst.add("R");
+        if(getDirection(root.right, val, lst))
+        {
+            return true;
+        }
         lst.remove(lst.size()-1);
         
         return false;
+    }
+    
+    public TreeNode findLca(TreeNode root, int startValue, int destValue)
+    {
+        if(root == null)
+            return null;
+        
+        if(root.val == startValue || root.val == destValue)
+            return root;
+        
+        TreeNode l = findLca(root.left, startValue, destValue);
+        TreeNode r = findLca(root.right, startValue, destValue);
+        
+        if(l != null && r != null) 
+            return root;
+        else if(l!= null)
+            return l;
+        else 
+            return r;
     }
 }
