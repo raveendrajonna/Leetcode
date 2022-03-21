@@ -11,10 +11,12 @@
 class Solution {
     public ListNode reverseKGroup(ListNode head, int k) {
         ListNode newHead =null;
-        ListNode prev = null;
+       // ListNode prev = null;
         Stack<ListNode> stk = new Stack<>();
         
         ListNode cur = head;
+        ListNode dummy = new ListNode(-1);
+        ListNode prev = dummy;
         while(cur != null)
         {
             int cnt=0;
@@ -30,16 +32,9 @@ class Solution {
                 //need to reverse;
                 while(stk.size() > 0)
                 {
-                    if(newHead == null)
-                    {
-                        newHead = stk.pop();
-                        prev = newHead;
-                    }
-                    else
-                    {
+
                         prev.next = stk.pop();
                         prev = prev.next;
-                    }
                 }
                 if(cur == null)
                     prev.next = null;
@@ -49,18 +44,10 @@ class Solution {
             {
                 while(stk.size() > 1)
                     stk.pop();
-                
-                if(newHead == null)
-                {
-                    newHead = stk.pop();
-                }
-                else
-                {
-                    prev.next = stk.pop();
-                }
+                 prev.next = stk.pop();
             }
         }
         
-        return newHead;
+        return dummy.next;
     }
 }
