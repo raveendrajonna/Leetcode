@@ -1,31 +1,31 @@
 class Solution {
-
     int[] arr;
     Random random;
+
     public Solution(int[] nums) {
-        random = new Random();
-        this.arr = nums;
+       random = new Random();
+       this.arr = nums;
     }
     
     public int[] reset() {
-      return arr;  
+        return this.arr;
     }
     
     public int[] shuffle() {
        int[] temp = arr.clone();
-        for(int i=1; i<arr.length; i++)
-        {
-            int j = random.nextInt(i+1);
-            swap(temp,i,j);
-        }
-        return temp;
+       for(int i=1; i<arr.length; i++)
+       {
+           int idx = random.nextInt(i+1);
+           swap(temp,i, idx);
+       }
+      return temp;
     }
     
-    public void swap(int[] a, int i , int j)
+    public void swap(int[] arr, int i, int j)
     {
-        int temp =a[i];
-        a[i] = a[j];
-        a[j] = temp;
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
 
