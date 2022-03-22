@@ -1,94 +1,93 @@
 class Solution {
     public List<String> fullJustify(String[] words, int maxWidth) {
-        int start =0;
+        int left=0;
         List<String> res = new ArrayList<>();
-        while(start < words.length)
+        while(left<words.length)
         {
-            int right = findRight(start, words, maxWidth);
-            String line = justify(words, start, right,maxWidth);
+            int right = fidnRight(left, words, maxWidth);
+            String line = justify(left, right, words, maxWidth);
             res.add(line);
-            start = right+1;
+            left = right+1;
         }
         return res;
     }
     
-    public int findRight(int left, String[] words, int maxWidth)
-    {
-        if(left == words.length) return left;
-        
-        int sum = words[left++].length();
-        while(left < words.length && (sum+1+words[left].length()) <= maxWidth)
-        {
-            sum = sum+1+words[left].length();
-            left++;
-        }
-        return left-1;
-    }
-    
-    public String justify(String[] words, int left, int right, int maxWidth)
+    public String justify(int left, int right, String[] words, int maxWidth)
     {
         StringBuilder sb = new StringBuilder();
-       if(left == right)
-       {
-           //single word, So no spaces
-           sb.append(words[left]);
-           sb.append(getSpace(maxWidth-words[left].length()));
-           return sb.toString();
-       }
+        if(left == right)
+        {
+            //only one word.
+            String res = words[left];
+            int cnt = (maxWidth - res.length());
+            res = res+getSpace(cnt);
+            return res;
+        }
         else if(right == words.length-1)
         {
-            //last line, no justification needed
-            int sum = getSum(words,left, right);
-            int spaceCnt = maxWidth-sum- (right-left);
-            sb.append(words[left++]);
-            while(left <= right)
+            //last line, no extra pads
+            int sum =  findSum(left, right, words);   
+            int noOfSpaces = (right-left);
+            int cnt = (maxWidth - sum-noOfSpaces);
+            for(int i=left; i<right; i++)
             {
-                sb.append(" ");
-                sb.append(words[left++]);
+                sb.append(words[i]);
+                sb.append(getSpace(1));
             }
-            
-            sb.append(getSpace(spaceCnt));          
+            sb.append(words[right]);
+            sb.append(getSpace(cnt));
             return sb.toString();
         }
         else
         {
-            // need to do justification.
-            int sum = getSum(words, left, right);
-            int cnt = (right-left);
-            int spaceCnt = (maxWidth-sum)/cnt;
-            int rem = (maxWidth-sum)%cnt;
-            String space= getSpace(spaceCnt);
-            sb.append(words[left++]);
-            while(left <= right)
+            int sum =  findSum(left, right, words);   
+            int noOfSpaces = (right-left);
+            int cnt = (maxWidth - sum)/noOfSpaces;
+            int rem = (maxWidth - sum) % noOfSpaces;
+            
+            for(int i=left; i<right; i++)
             {
-                sb.append(space);
-                sb.append(rem>0?" ":"");
-                sb.append(words[left++]);
-               
+                sb.append(words[i]);
+                sb.append(getSpace(cnt));
+                sb.append(getSpace(rem>0?1:0));
                 rem--;
             }
+            sb.append(words[right]);
             return sb.toString();
         }
-    
     }
     
-    public int getSum(String[] words, int left, int right)
+    public int fidnRight(int left, String[] words, int maxWidth)
+    {
+        if(left == words.length)
+            return left;
+        int len = words[left++].length();
+        while(left < words.length && (len+words[left].length()+1) <= maxWidth)
+        {
+            len = len+words[left].length()+1;
+            left++;
+        }
+        return left-1;
+    }
+
+    public int findSum(int left, int right, String[] words)
     {
         int sum =0;
         for(int i=left; i<=right; i++)
         {
-            sum += words[i].length();
+            sum = sum+words[i].length();
         }
         return sum;
     }
-    
-    public String getSpace(int len)
+
+    public String getSpace(int cnt)
     {
         StringBuilder sb = new StringBuilder();
-        for(int i=0; i<len; i++)
+        for(int i=0; i<cnt; i++)
         {
             sb.append(" ");
         }
         return sb.toString();
     }
+
 }
