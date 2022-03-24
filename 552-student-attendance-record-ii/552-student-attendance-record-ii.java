@@ -1,29 +1,32 @@
 class Solution {
-    int mod = 100000007;
     public int checkRecord(int n) {
        int[][][] mem = new int[n][2][3];
-       return util(0, n, 0, 0, mem); 
+       return util(0,n,0,0,mem);
     }
     
-    public int util(int i, int n , int a, int l, int[][][] mem)
+    public int util(int i, int n, int a, int l,int[][][] mem)
     {
-        if(i==n)
-             return 1;
+        if(i == n) 
+           return 1;
         
         if(mem[i][a][l] != 0)
             return mem[i][a][l];
         
-        long res = 0;
-        res = util(i+1, n, a, 0,  mem); //p
+        //p
+        long res =0;
+        res = res + util(i+1,n, a, 0, mem);
         
+        //a
         if(a == 0)
-            res = res + util(i+1, n, 1, 0 ,  mem);
+            res = res+ util(i+1, n, a+1, 0, mem);
         
-        if(l < 2)
-            res = res+ util(i+1, n, a, l+1, mem);
-            
-         mem[i][a][l] = (int)(res%1000000007);
+        if(l <2)
+        {
+            res =  res + util(i+1, n, a, l+1, mem);
+        }
+       
+        mem[i][a][l] = (int)(res%1000000007);
         
-       return mem[i][a][l];
+        return mem[i][a][l];
     }
 }
