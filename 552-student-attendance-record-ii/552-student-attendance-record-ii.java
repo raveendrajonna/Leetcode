@@ -1,26 +1,29 @@
 class Solution {
-    int mod = 1000000007;
-    HashMap<String,Long> hm = new HashMap<>();
+    int mod = 100000007;
     public int checkRecord(int n) {
-              int[][][] mem = new int[n][2][3];
-        return dfs(0, 0, 0, n, mem);   
+       int[][][] mem = new int[n][2][3];
+       return util(0, n, 0, 0, mem); 
     }
-    private int dfs(int i, int A, int L, int n, int[][][] mem) {
-        if(i==n) 
-            return 1;
+    
+    public int util(int i, int n , int a, int l, int[][][] mem)
+    {
+        if(i==n)
+             return 1;
         
-        if(mem[i][A][L]!=0) return mem[i][A][L];
+        if(mem[i][a][l] != 0)
+            return mem[i][a][l];
         
-        long res = dfs(i+1, A, 0, n, mem);  //P
+        long res = 0;
+        res = util(i+1, n, a, 0,  mem); //p
         
-        if(A==0) 
-            res += dfs(i+1, 1, 0, n, mem); //A
+        if(a == 0)
+            res = res + util(i+1, n, 1, 0 ,  mem);
         
-        if(L<2) 
-            res += dfs(i+1, A, L+1, n, mem); //L
+        if(l < 2)
+            res = res+ util(i+1, n, a, l+1, mem);
+            
+         mem[i][a][l] = (int)(res%1000000007);
         
-         mem[i][A][L] = (int)(res%1000000007);
-        
-        return mem[i][A][L];
+       return mem[i][a][l];
     }
 }
