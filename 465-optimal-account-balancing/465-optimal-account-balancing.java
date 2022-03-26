@@ -1,34 +1,40 @@
 class Solution {
+    
     public int minTransfers(int[][] transactions) {
-      HashMap<Integer,Integer> hm = new HashMap<>();
-        for(int[] transaction : transactions)
+        
+        HashMap<Integer,Integer> hm = new HashMap<>();
+        for(int i=0; i< transactions.length; i++)
         {
-            hm.put(transaction[0], hm.getOrDefault(transaction[0], 0) + transaction[2]);
-            hm.put(transaction[1], hm.getOrDefault(transaction[1], 0) - transaction[2]);
+            hm.put(transactions[i][0] , hm.getOrDefault(transactions[i][0], 0) + transactions[i][2]);
+            hm.put(transactions[i][1] , hm.getOrDefault(transactions[i][1], 0) - transactions[i][2]);
         }
-       
-        int[] res = new int[hm.size()];
-        int idx =0;
-        for(int value : hm.values())
+        
+        int[] bal = new int[hm.size()];
+        int idx=0;
+        for(int val : hm.values())
         {
-            res[idx++] = value;
+            bal[idx++] = val;
         }
-        return dfs(0, res);
+        
+        return dfs(bal, 0);
     }
     
-    private int dfs(int idx, int[] res)
+    public int dfs(int[] bal, int idx)
     {
-        if(idx == res.length) return 0;
+        if(idx == bal.length)
+            return 0;
         
-        if(res[idx] == 0) return dfs(idx+1, res);
+        if(bal[idx] == 0)
+            return dfs(bal, idx+1);
         
-        int ans = Integer.MAX_VALUE;
-        for(int i=idx+1; i <res.length; i++)
+        int val = Integer.MAX_VALUE;
+        for(int i= idx+1; i< bal.length; i++)
         {
-            res[i]+= res[idx];
-            ans = Math.min(ans, 1+ dfs(idx+1, res));
-            res[i]-= res[idx];
+            bal[i] = bal[i] + bal[idx];
+            val = Math.min(val , 1+ dfs(bal, idx+1));
+            bal[i] = bal[i]-bal[idx]; 
         }
-        return ans;
+        
+        return val;
     }
 }
