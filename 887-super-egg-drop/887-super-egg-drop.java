@@ -2,15 +2,18 @@ class Solution {
     public int superEggDrop(int k, int n) {
         int[][] dp = new int[n+1][k+1];
         
-        int m=0;
+        int m =0;
+    
         while(dp[m][k] < n)
         {
             m++;
-            for(int j=1; j<=k; j++)
+            for(int i=1; i<=k; i++)
             {
-                dp[m][j] = 1 + dp[m-1][j-1] +dp[m-1][j];
+                dp[m][i] = 1+ dp[m-1][i-1]+ dp[m-1][i];
             }
+            
         }
         return m;
+        
     }
 }
