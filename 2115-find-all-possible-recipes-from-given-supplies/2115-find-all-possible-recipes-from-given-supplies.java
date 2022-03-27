@@ -1,61 +1,51 @@
 class Solution {
     public List<String> findAllRecipes(String[] recipes, List<List<String>> ingredients, String[] supplies) {
-        HashMap<String,List<String>> edges = new HashMap<>();
-        HashSet<String> res = new HashSet<>();
-        HashMap<String,Integer> visited = new HashMap<>();
-        HashSet<String> hsSup = new HashSet<>();
-        
-        for(String sup : supplies )
+        HashSet<String> hs = new HashSet<>();
+        for(int i=0; i<supplies.length; i++)
         {
-            hsSup.add(sup);
+            hs.add(supplies[i]);
         }
-        
+        HashMap<String, List<String>> hm = new HashMap<>();
         for(int i=0; i<recipes.length; i++)
         {
-            String item = recipes[i];
-            edges.put(item, new ArrayList<>());
-            for(String s : ingredients.get(i))
-            {
-                edges.get(item).add(s);
-            }
+            hm.put(recipes[i], ingredients.get(i));
         }
         
-        for(String item : recipes)
+        HashMap<String,Integer> visited = new HashMap<>();
+        
+        List<String> res = new ArrayList<>();
+        
+        for(String key : hm.keySet())
         {
-           if(visited.getOrDefault(item,0) == 2 || dfs(item, edges, hsSup, visited))
-           {
-               res.add(item);
-           }   
+            if(!visited.containsKey(key))
+               dfs(key, hm, visited, hs, res); 
         }
+        return res;
         
-        return new ArrayList<>(res);
     }
     
-    public boolean dfs(String item, HashMap<String, List<String>> edges, HashSet<String> hsSup,  HashMap<String,Integer> visited)
+    public boolean dfs(String item, HashMap<String, List<String>> hm, HashMap<String,Integer> visited, HashSet<String> hs, List<String> res)
     {
+        if(visited.getOrDefault(item,0) == 2)
+            return  true ;
+        
         if(visited.getOrDefault(item,0) == 1)
-        {
             return false;
+        
+        visited.put(item,1);
+        if(!hm.containsKey(item) && !hs.contains(item))
+            return false;
+        
+        for(String dep : hm.get(item))
+        {
+            boolean val =  (hs.contains(dep) || dfs(dep, hm, visited, hs, res));
+            if(val == false)
+                return false;
         }
         
-        visited.put(item, 1);
-        for(String dep : edges.get(item))
-        {
-            if(hsSup.contains(dep))
-            {
-               continue;
-            }
-            else if(edges.containsKey(dep) && dfs(dep, edges, hsSup, visited))
-            {
-                continue;
-            }
-            else
-            {
-                return false;
-            }
-        }
         visited.put(item,2);
-        hsSup.add(item);
+        hs.add(item);
+        res.add(item);
         return true;
     }
 }
