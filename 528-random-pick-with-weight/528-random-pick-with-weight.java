@@ -1,15 +1,15 @@
 class Solution {
-
     TreeMap<Integer,Integer> tm;
-    int sum =0;
     Random random;
+    int sum;
     public Solution(int[] w) {
         random = new Random();
-        tm = new TreeMap<>();  
+        tm = new TreeMap<>();
+        sum=0;
         for(int i=0; i<w.length; i++)
         {
-            sum = sum + w[i];
-            tm.put(sum,i);
+            sum = sum+w[i];
+            tm.put(sum, i);
         }
     }
     
