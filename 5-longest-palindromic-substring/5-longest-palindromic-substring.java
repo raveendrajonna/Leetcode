@@ -1,22 +1,20 @@
 class Solution {
     public String longestPalindrome(String s) {
-        int n = s.length();
-        String starString = generateStarString(s);
+        String starString = generateStar(s);
+        int c=0, r=0, len=1, idx =0;
         int[] dp = new int[starString.length()];
-        int c=0, r =0;
-        int len=1;
-        int idx=0;
         for(int i=1; i<starString.length(); i++)
         {
-            int mirror = (2*c)-r;
-            //System.out.println(" mirror :" + mirror +", i :"+ i +", c :" +c +", r : "+ r);
-            if(i < r)
-                dp[i] = Math.min(dp[mirror], r-i);
+            int mir = (2*c) - r;
             
-            while(i-dp[i] >= 0 && i+dp[i] < starString.length() 
-                  && starString.charAt(i-dp[i]) == starString.charAt(i+dp[i]))
+            if(i < r)
+                dp[i] = Math.min(dp[mir], r-i);
+            
+            while( (i-dp[i]) >=0 && (i+dp[i]) < starString.length()
+               && (starString.charAt(i-dp[i]) == starString.charAt(dp[i]+i)))
             {
                 dp[i]++;
+                
                 if(len < dp[i])
                 {
                     len = dp[i];
@@ -24,25 +22,26 @@ class Solution {
                 }
             }
             
-            if( (i+dp[i]) > r)
+            if(i+dp[i] < r)
             {
                 c = i;
                 r = i+dp[i]-1;
-            }
+            }          
         }
-       // System.out.println(" len :"+ len +", idx :"+ (idx-len) );
-        String val = starString.substring(idx-len+1, idx+len);
-        return val.replace("*", "");
+        
+        String subStr = starString.substring(idx-len+1, idx+len);
+        return subStr.replace("*","");
     }
     
-    public String generateStarString(String s)
+    public String generateStar(String s)
     {
+        int n = s.length();
         StringBuilder sb = new StringBuilder();
-       for(char c : s.toCharArray())
-       {
-          sb.append("*");
-           sb.append(c);
-       }
+        for(int i=0; i<n; i++)
+        {
+            sb.append("*");
+            sb.append(s.charAt(i));
+        }
         sb.append("*");
         return sb.toString();
     }
