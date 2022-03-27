@@ -1,24 +1,22 @@
 class SnapshotArray {
 
     TreeMap<Integer,Integer> tm[];
-    int snapshot;
+    int snapShot=0;
     public SnapshotArray(int length) {
-        snapshot=0;
-        tm = new TreeMap[length];
+       tm = new TreeMap[length];
         for(int i=0; i<length; i++)
         {
-           tm[i] = new TreeMap<>();
-           tm[i].put(snapshot, 0);
+            tm[i] = new TreeMap<>();
+            tm[i].put(snapShot,0);
         }
     }
     
     public void set(int index, int val) {
-        tm[index].put(snapshot, val);
+        tm[index].put(snapShot, val);
     }
     
     public int snap() {
-       snapshot++;
-       return snapshot-1;
+       return snapShot++;
     }
     
     public int get(int index, int snap_id) {
