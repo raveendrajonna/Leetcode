@@ -1,37 +1,38 @@
 class Solution {
     public int numMatchingSubseq(String s, String[] words) {
-        HashMap<Character, Queue<String>> hm = new HashMap<>();
-        for(int i=0; i<26; i++)
-        {
-            hm.put((char)('a'+i), new LinkedList<>());
-        }
-        
+        HashMap<Character, List<String>> hm = new HashMap<>();
         for(String word : words)
         {
+            hm.putIfAbsent(word.charAt(0), new ArrayList<>());
             hm.get(word.charAt(0)).add(word);
         }
         
         int res=0;
-        for(int i=0; i<s.length(); i++)
+        for(char c : s.toCharArray())
         {
-            char c = s.charAt(i);
-            Queue<String> q = hm.get(c);
-            int size = q.size();
-            while(size > 0)
+            List<String> hs  = hm.get(c);
+            if(hs == null )
+                continue;
+           hm.put(c, new ArrayList<>());
+            
+            
+            
+            for(String word : hs)
             {
-                size--;
-                String cur = q.remove();
-                if(cur.length() == 1)
+                if(word.length() == 1)
                 {
                     res++;
                 }
                 else
                 {
-                    hm.get(cur.charAt(1)).add(cur.substring(1));
+                    String newWord = word.substring(1);
+                    hm.putIfAbsent(newWord.charAt(0), new ArrayList<>());
+                    hm.get(newWord.charAt(0)).add(newWord);
                 }
             }
         }
         return res;
-        
     }
+    
+
 }
