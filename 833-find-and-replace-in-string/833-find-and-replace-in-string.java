@@ -1,44 +1,43 @@
 class Solution {
     public String findReplaceString(String s, int[] indices, String[] sources, String[] targets) {
-        int n = indices.length;
-        Node[] nodes = new Node[n];
-        for(int i=0; i<n; i++)
-        {
-           Node nd = new Node(indices[i], sources[i], targets[i]);
-            nodes[i] = nd;
-        }
-        Arrays.sort(nodes, (x,y)-> (y.idx - x.idx));
         
-        for(int i=0; i<n; i++)
+        List<Node> lst = new ArrayList<>();
+        for(int i=0; i<indices.length; i++)
         {
-            Node nd = nodes[i];
-            int len = nd.source.length();
-           // if(s.substring(nd.idx, nd.idx+len+1).equals(nd.source))
-            if(s.substring(nd.idx).startsWith(nd.source))
+            Node node = new Node();
+            node.index = indices[i];
+            node.source = sources[i];
+            node.target = targets[i];
+            lst.add(node);
+            
+        }
+        
+        Collections.sort(lst, (x,y)-> (y.index - x.index));
+        
+        for(int i=0; i<lst.size(); i++)
+        {
+            Node node = lst.get(i);
+            int idx = s.indexOf(node.source);
+            
+            if(s.substring(node.index).startsWith(node.source))
             {
-                s = s.substring(0,nd.idx)+ nd.dest + s.substring(nd.idx+len);
+               s = s.substring(0,node.index)+ node.target + s.substring(node.index+node.source.length()); 
             }
         }
+        
         return s;
+        
     }
     
     class Node
     {
-        int idx;
+        int index;
         String source;
-        String dest;
+        String target;
         
-        public Node(int idx, String src, String dest)
+        public String toString()
         {
-            this.idx = idx;
-            this.source = src;
-            this.dest = dest;
+            return index+","+ source+","+ target;
         }
-        
-       /* @Override
-        public int compareTo(Node other)
-        {
-            return other.idx - this.idx;
-        } */
     }
 }
