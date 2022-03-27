@@ -1,53 +1,48 @@
 class Solution {
     public String longestPalindrome(String s) {
-        if(s.length() == 1)
-            return s;
-        
-        int c=0, r=0;
-        
-        String starString = generateStarSubString(s);
-        int n = starString.length();
-        int dp[] = new int[n];
-        int res= 1,idx=0;
-        for(int i=1; i<n; i++)
+        int n = s.length();
+        String starString = generateStarString(s);
+        int[] dp = new int[starString.length()];
+        int c=0, r =0;
+        int len=1;
+        int idx=0;
+        for(int i=1; i<starString.length(); i++)
         {
-            int l = (2*c)-r;
-            if(i<r)
-            {
-                dp[i] = Math.min(dp[l] , r-i);
-            }
+            int mirror = (2*c)-r;
+            //System.out.println(" mirror :" + mirror +", i :"+ i +", c :" +c +", r : "+ r);
+            if(i < r)
+                dp[i] = Math.min(dp[mirror], r-i);
             
-            while((i-dp[i]) >= 0 && ((i+dp[i]) < n) 
-                  && starString.charAt(i-dp[i]) == starString.charAt(i+dp[i]) )
+            while(i-dp[i] >= 0 && i+dp[i] < starString.length() 
+                  && starString.charAt(i-dp[i]) == starString.charAt(i+dp[i]))
             {
                 dp[i]++;
-                if(res < dp[i])
+                if(len < dp[i])
                 {
-                    res = dp[i];
+                    len = dp[i];
                     idx = i;
                 }
             }
-
             
-            if(i+dp[i] > r)
+            if( (i+dp[i]) > r)
             {
                 c = i;
-                r= i+dp[i]-1;
+                r = i+dp[i]-1;
             }
         }
-        String freqString = starString.substring(idx-res+1, idx+res);
-        freqString = freqString.replace("*","");
-        return freqString;
+       // System.out.println(" len :"+ len +", idx :"+ (idx-len) );
+        String val = starString.substring(idx-len+1, idx+len);
+        return val.replace("*", "");
     }
     
-    public String generateStarSubString(String s)
+    public String generateStarString(String s)
     {
         StringBuilder sb = new StringBuilder();
-        for(char c : s.toCharArray())
-        {
-            sb.append("*");
-            sb.append(c);
-        }
+       for(char c : s.toCharArray())
+       {
+          sb.append("*");
+           sb.append(c);
+       }
         sb.append("*");
         return sb.toString();
     }
