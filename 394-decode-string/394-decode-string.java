@@ -1,40 +1,42 @@
 class Solution {
     public String decodeString(String s) {
-        Stack<Integer> stk = new Stack<>();
+        Stack<Integer> stkNum = new Stack<>();
         Stack<StringBuilder> stkStr = new Stack<>();
-        int num=0;
-        StringBuilder cur = new StringBuilder();
-        int n = s.length();
-        for(int i=0; i<n; i++)
+        
+        int num =0;
+        StringBuilder sb = new StringBuilder();
+        
+        for(char c : s.toCharArray())
         {
-            if(Character.isDigit(s.charAt(i)))
+            if(Character.isDigit(c))
             {
-                num = num*10 + s.charAt(i)-'0';
+                num = num*10 + (c-'0');
+                
             }
-            else if(s.charAt(i) == '[')
+            else if(c == '[')
             {
-                stk.push(num);
-                num =0;
-                stkStr.push(cur);
-                cur = new StringBuilder();
+                stkNum.push(num);
+                num=0;
+                stkStr.push(sb);
+                sb = new StringBuilder();
             }
-            else if(s.charAt(i)== ']')
+            else if(c == ']')
             {
-                StringBuilder sb = stkStr.pop();
-                int tn = stk.pop();
-                while(tn>0)
+                StringBuilder temp = stkStr.pop();
+                int val = stkNum.pop();
+                while(val > 0)
                 {
-                    sb.append(cur.toString());
-                    tn--;
+                    temp.append(sb.toString());
+                    val--;
                 }
-                cur = sb;
+                sb = temp;
             }
             else
             {
-                cur.append(s.charAt(i));
+                sb.append(c);
             }
         }
-        return cur.toString();
         
+       return sb.toString(); 
     }
 }
