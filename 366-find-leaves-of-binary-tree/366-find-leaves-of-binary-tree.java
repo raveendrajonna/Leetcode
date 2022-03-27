@@ -15,24 +15,27 @@
  */
 class Solution {
     public List<List<Integer>> findLeaves(TreeNode root) {
-        List<List<Integer>> res = new ArrayList<>();
-        getLevel(root, res);
+      List<List<Integer>> res = new ArrayList<>();
+      getHeight(root, res);
         return res;
     }
     
-    public int getLevel(TreeNode root, List<List<Integer>> res)
+    public int getHeight(TreeNode root, List<List<Integer>> res)
     {
         if(root == null)
             return 0;
         
-        int l = getLevel(root.left, res);
-        int r = getLevel(root.right, res);
-        int level = Math.max(l,r);
-        if(res.size() <= level)
+        int l = getHeight(root.left,  res);
+        int r = getHeight(root.right, res);
+        int level = Math.max(l,r)+1;
+        
+        if(res.size() <level)
         {
-            res.add( new ArrayList<>());
+            res.add(new ArrayList<Integer>());   
         }
-        res.get(level).add(root.val);
-        return level+1;
+         res.get(level-1).add(root.val);
+        
+        return level;
+        
     }
 }
