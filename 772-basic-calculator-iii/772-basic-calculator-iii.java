@@ -1,75 +1,81 @@
 class Solution {
-    
     public int calculate(String s) {
-       int[] idx =new int[]{0};
-       return eval(s, idx);
+        int[] idx = new int[1];
+        idx[0] = 0;
+        return eval(s, idx);
     }
     
     public int eval(String s, int[] idx)
     {
-       char operator ='+';
-       int num = 0;
+        int num =0;
         Stack<Integer> stk = new Stack<>();
-       while(idx[0] < s.length())
-       {
-          char c =  s.charAt(idx[0]); 
-          if(Character.isDigit(c))
-          {
-              num = num*10 + (s.charAt(idx[0])-'0');
-              idx[0]++;
-          }
-          else if(c == '(')
-          {
-              idx[0]++;
-              num = eval(s, idx);
-          }
-          else if(c == '+' || c == '-' || c == '*' || c == '/')
-          {
-              handleOpr(operator, num, stk);
-              operator = c;
-              num =0;
-              idx[0]++;
-          }
-          else if(c == ')')
-          {
-              handleOpr(operator,num, stk); 
-              num =0;
-              int sum =0;
-              while(stk.size() > 0)
-              {
-                  sum = sum+stk.pop();
-              }
-              idx[0]++;
-              return sum;
-          }
-
-       }
-       handleOpr(operator, num, stk); 
-       int sum =0;
-       while(stk.size() > 0)
-       {
-          sum = sum+stk.pop();
-          // System.out.println(" su :"+ sum);
-       }
-       return sum;
+        stk.push(0);
+        char op ='+';
+        
+        while(idx[0] < s.length())
+        {
+            char c = s.charAt(idx[0]);
+            
+            if(Character.isDigit(c))
+            {
+                num = num*10 + c-'0';
+                idx[0]++;
+            }
+            else if(c=='(')
+            {
+                idx[0]++;
+                num = eval(s,idx);
+               // System.out.println(" eval :"+ num +" idx : " + idx[0]);
+            }
+            else if(c ==')')
+            {
+                handle(stk, num, op);
+                int sum =0;
+                while(stk.size() > 0)
+                {
+                  sum = sum + stk.pop();
+                }
+                idx[0]++;
+                return sum;
+            }
+            else
+            {
+               // System.out.println(stk +", ****  idx :" + idx[0]);
+                handle(stk, num, op);
+                op = s.charAt(idx[0]);
+                idx[0]++;
+                num =0;
+            }
+        }
+        handle(stk, num, op);
+        int sum =0;
+        while(stk.size() > 0)
+        {
+            System.out.println(stk.peek());
+            sum = sum+stk.pop();
+        }
+        return sum;
     }
     
-    public void handleOpr(char operator, int num, Stack<Integer> stk)
+    public void handle(Stack<Integer> stk, int num, char c)
     {
-        switch(operator)
+        if(c=='+')
         {
-            case '+':
-                stk.push(num);
-                break;
-            case '-':
-                stk.push(-1*num);
-                break;
-            case '*':
-                stk.push(stk.pop()*num);
-                break;
-            case '/':
-                stk.push(stk.pop()/num);
-                break;
+            stk.push(num);
         }
+        else if(c == '-')
+        {
+            stk.push( -1 * num);
+        }
+        else if(c == '*')
+        {
+            int num1 = stk.pop();
+            stk.push(num1*num);
+        }
+        else{
+            int num1 = stk.pop();
+            stk.push(num1/num);
+        }
+         //System.out.println(" num :" + num +", c : "+ c + " stk : " + stk);
     }
 }
