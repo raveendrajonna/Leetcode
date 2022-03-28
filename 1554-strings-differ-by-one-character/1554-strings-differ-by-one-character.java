@@ -1,71 +1,68 @@
 class Solution {
-    Trie root;
     public boolean differByOne(String[] dict) {
-        root = new Trie();
+        Trie root = new Trie();
         for(String word : dict)
         {
-          if(search(word, 0, root, 0) )
-          {
-              return true;
-          }
-           addToTrie(word);
-        } 
+            if(search(root, word, 0, 0))
+            {
+                return true;
+            }
+            
+            insert(root, word);
+        }
         return false;
     }
     
-    public boolean search(String word, int idx, Trie node, int misMatches)
+    public void insert(Trie root, String word)
     {
-       if(misMatches > 1)
-            return false;
-        
-        if(idx == word.length())
-             return true;
-        
-        for(char c : node.childs.keySet())
+       Trie temp = root;
+        for(char c : word.toCharArray())
         {
-            if(c == word.charAt(idx))
+            if(temp.childs[c-'a'] == null)
             {
-                boolean val =  search(word, idx+1, node.childs.get(c), misMatches);
-                if(val) 
-                    return true;
+                temp.childs[c-'a'] = new Trie();
+            }
+            temp = temp.childs[c-'a'];
+        }
+        temp.isEnd = true;
+    }
+    
+    public boolean search(Trie root, String word, int idx, int diff)
+    {
+       // System.out.println(" idx :" + idx +" word :" + word +", diff :" + diff);
+        if(diff > 1 || root ==null)
+            return false;
+
+        if(idx == word.length() )
+            return true;
+        
+        char c = word.charAt(idx);
+        for(int i=0; i<26; i++)
+        {
+            if(c-'a' == i)
+            {
+              boolean val =  search(root.childs[i], word, idx+1, diff);
+                if(val) return val;
             }
             else
             {
-               boolean val = search(word, idx+1, node.childs.get(c), misMatches+1);
-                if(val)
-                    return true;
+               boolean val = search(root.childs[i], word, idx+1, diff+1);
+                if(val == true)
+                    return val;
             }
-            
         }
-        
         return false;
-    }
-    
-    
-    public void addToTrie(String word)
-    {
-
-              Trie temp = root;
-              for(char c : word.toCharArray())
-              {
-                  if(!temp.childs.containsKey(c))
-                  {
-                      temp.childs.put(c,new Trie());
-                  }
-                  temp = temp.childs.get(c);
-              }
-              temp.isEnd = true;
     }
     
     class Trie
     {
-        HashMap<Character,Trie> childs;
+        Trie[] childs;
         boolean isEnd;
         
         public Trie()
         {
-            childs = new HashMap<>();
             isEnd = false;
+            childs = new Trie[26];
         }
     }
 }
