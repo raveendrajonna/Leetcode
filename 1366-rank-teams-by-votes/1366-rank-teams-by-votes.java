@@ -2,6 +2,7 @@ class Solution {
     public String rankTeams(String[] votes) {
         int[][] dp = new int[26][26];
         
+        int n = votes.length;
         for(String word : votes)
         {
             for(int i=0; i<word.length(); i++)
@@ -11,17 +12,23 @@ class Solution {
         }
         
         char[] ans = votes[0].toCharArray();
-        Character[] tmp = new Character[ans.length];
-        for (int i = 0; i < ans.length; i++) tmp[i] = ans[i];
-        Arrays.sort(tmp, (t1, t2)->{
-            for(int i=0; i<26; i++)
-               if(dp[t1-'A'][i] != dp[t2-'A'][i])
-                   return dp[t2-'A'][i] - dp[t1-'A'][i];
-             return t1-t2;
+        Character[] temp = new Character[ans.length];
+        for(int i=0; i<ans.length; i++)
+        {
+            temp[i] = ans[i];
+        }
+        
+        Arrays.sort(temp, (x, y) ->{
+            for(int i=0;i<26; i++)
+                if(dp[x-'A'][i] != dp[y-'A'][i]) 
+                    return dp[y-'A'][i] - dp[x-'A'][i];
+            return x-y;
         });
-        
-        for (int i = 0; i < ans.length; i++) ans[i] = tmp[i];
-        
-        return new String(ans);
+            
+       for(int i=0; i<ans.length; i++)
+        {
+            ans[i] = temp[i];
+        }
+        return  new String(ans);
     }
 }
