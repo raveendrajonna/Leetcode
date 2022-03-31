@@ -1,45 +1,46 @@
 class Solution {
     public int splitArray(int[] nums, int m) {
-        int sum=0, max =0;
-        for(int i=0; i<nums.length; i++)
+        int max = Integer.MIN_VALUE;
+        int sum=0;
+        for(int num : nums)
         {
-            sum = sum+nums[i];
-            max = Math.max(max, nums[i]);
+            max = Math.max(max, num);
+            sum = sum+num;
         }
         
-        int l=max;
-        int r= sum;
+        int l = max;
+        int r = sum;
         
-        while(l<r)
+        while(l<=r)
         {
-            int mid = l +(r-l)/2;
-            int cnt = findPeople(nums, mid);
-            if(cnt > m)
+            int mid = l + (r-l)/2;
+            int cnt = findNoOfParts(nums, mid);
+            if(cnt < m)
+            {
+                r = mid-1;
+            }
+            else
             {
                 l = mid+1;
             }
-            else
-            {
-                r = mid;
-            }
         }
-        return r;
-        
+        return l;
     }
     
-    public int findPeople(int[] arr, int val)
+    public int findNoOfParts(int[] nums, int limit)
     {
-        int cnt=1, sum =0;
-        for(int i=0; i<arr.length; i++)
+        int sum =0;
+        int cnt =0;
+        for(int num : nums)
         {
-           if(sum+arr[i] <= val)
-           {
-              sum += arr[i]; 
-           }
+            if(sum+num <= limit)
+            {
+                sum = sum+num;
+            }
             else
             {
+                sum = num;
                 cnt++;
-                sum =arr[i];
             }
         }
         return cnt;
